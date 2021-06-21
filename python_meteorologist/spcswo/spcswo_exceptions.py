@@ -1,3 +1,7 @@
+"""
+Copyright (C) 2021 Patrick Maloney
+"""
+
 class InvalidOutlookTypeError(Exception):
     """Raised when the Outlook type is invalid (not 1, 2, or 3)
 

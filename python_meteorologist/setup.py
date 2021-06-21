@@ -6,7 +6,7 @@ LONG_DESCRIPTION = 'Python package to get emergency alerts, forecasts, and sever
 
 # Setting up
 setup(
-    name="python-meteorologist",
+    name="python_meteorologist",
     version=VERSION,
     author="Patrick Maloney",
     author_email="alertingavian@vivaldi.net",

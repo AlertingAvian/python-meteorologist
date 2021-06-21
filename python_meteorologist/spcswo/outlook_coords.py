@@ -1,6 +1,10 @@
+"""
+Copyright (C) 2021 Patrick Maloney
+"""
+
 from typing import List, Tuple
 from bs4 import BeautifulSoup
-import weather_exceptions
+from .spcswo_exceptions import InvalidOutlookTypeError, OutlookTypeNotSetError, UnableToRetrieveSWOError
 import requests
 import re
 
@@ -20,7 +24,7 @@ class SWO(object):
 
     def set_otlk_type(self, otlk_type) -> None:
         if otlk_type not in (1, 2, 3):
-            raise weather_exceptions.InvalidOutlookTypeError(otlk_type)
+            raise InvalidOutlookTypeError(otlk_type)
         self.__otlk_type = {1: 'day_1_otlk', 2: 'day_2_otlk', 3: 'day_3_otlk'}[otlk_type]
 
     def get_otlk_type(self) -> str:
@@ -60,14 +64,14 @@ class SWO(object):
     # noinspection PyTypeChecker
     def get_otlk(self) -> None:
         if self.__otlk_type is None:
-            raise weather_exceptions.OutlookTypeNotSetError()
+            raise OutlookTypeNotSetError()
         # get archive page
         url = "https://www.spc.noaa.gov/products/outlook/{}.html".format({'day_1_otlk': 'day1otlk',
                                                                           'day_2_otlk': 'day2otlk',
                                                                           'day_3_otlk': 'day3otlk'}[self.__otlk_type])
         otlk_page = requests.get(url)
         if str(otlk_page) != '<Response [200]>':
-            raise weather_exceptions.UnableToRetrieveSWOError(otlk_page)
+            raise UnableToRetrieveSWOError(otlk_page)
         soup = BeautifulSoup(otlk_page.content, 'html.parser')
         results = soup.find_all("a")
 

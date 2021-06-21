@@ -13,7 +13,7 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
-    install_requires=[],  # TODO: thing here
+    install_requires=['geopy'],
 
     keywords=['python', 'weather', 'meteorology'],
     classifiers=[

@@ -5,6 +5,7 @@ import requests
 import re
 
 # TODO: Documentation
+# TODO: Rewrite for dataclasses
 
 
 class SWO(object):
